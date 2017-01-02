@@ -1,0 +1,15 @@
+#+TITLE: Lukas
+#+AUTHOR: Yusuke Kido <mail@yusuk.eki.do>
+
+* How to use
+
+  1. Install dependencies (=bundle=)
+  2. Start server (=bundle exec rackup=)
+
+* Copyright notice
+
+  This software includes the following softwares:
+
+  - Reset CSS - http://meyerweb.com/eric/tools/css/reset/
+  - opentip - http://www.opentip.org/
+  - Nested & Expandable Folders - https://css-tricks.com/snippets/css/nested-expandable-folders/

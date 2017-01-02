@@ -1,12 +1,60 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>Lukas</title>
         <meta charset="utf-8" />
         <%= stylesheet_tag 'lukas' %>
         <%= javascript_tag 'lukas' %>
     </head>
     <body>
-        ruby sucks.
+        <section id="txt-flash" class="hidden"></section>
+
+        <section id="title-bar" class="layout">
+            <span>Lukas</span>
+            <button>→</button>
+            <button id="btn-up">↑</button>
+            <button>←</button>
+        </section>
+
+        <section id="txt-body" class="layout closed"></section>
+
+        <section id="popup" class="layout closed">
+            <button id="btn-close">X</button>
+            <select></select><br />
+            Required skills: <section id="labels"></section><br />
+            Hint: <div id="txt-preview"></div>
+            <button id="btn-addsave">add</button>
+            <button id="btn-remove">remove</button>
+        </section>
+
+        <section id="txt-question" class="layout">
+            <section></section>
+        </section>
+
+        <section class="dlg-overlay">
+            <section id="dlg-folders">
+                <h1>
+                    Lukas
+                </h1>
+                <div class="css-treeview">
+                </div>
+                <button class="btn-dlg-close">X</button>
+            </section>
+        </section>
+        <section class="dlg-overlay hidden">
+            <section id="dlg-open">
+                <form>
+                    <h2></h2>
+                    <hr />
+                    <h2>Start new annotation:</h2>
+                    <input placeholder="File name" />
+                    <button>Start</button>
+                    <hr />
+                    <h2>Edit saved annotation:</h2>
+                    <ul></ul>
+                </form>
+                <button class="btn-dlg-close">X</button>
+            </section>
+        </section>
     </body>
 </html>

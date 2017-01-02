@@ -1,0 +1,19 @@
+<% if tree.empty? %>
+    No documents found.
+<% else %>
+    <ul>
+        <% for k, v in tree do %>
+            <li>
+                <% if v.is_a? String %>
+                    <a data-fullpath="<%=h v %>" data-annotations="<%=h annotations[v].to_json %>">
+                        <%=h k %>
+                    </a>
+                <% else %>
+                    <% r = rand %>
+                    <input type="checkbox" id="item-<%= r %>" /><label for="item-<%= r %>"><%=h k %></label>
+                    <%= erb :tree, :locals => {tree: v, annotations: annotations} %>
+                <% end %>
+            </li>
+        <% end %>
+    </ul>
+<% end %>
