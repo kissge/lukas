@@ -246,7 +246,7 @@ $(() => {
             li.appendTo($('#dlg-open ul'));
         });
         $('#dlg-open h2').eq(0).text(current.document);
-        $('#dlg-open input').val('');
+        $('#dlg-open input').val(current.annotation);
         $('#dlg-open').parent().show();
     });
 
