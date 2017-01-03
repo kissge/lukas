@@ -171,12 +171,7 @@ $(() => {
             $(popup.edit).remove();
         }
 
-        $.post('/save', $.extend({
-            annotations: JSON.stringify($('.question-annotations').map((_, e) => [
-                $(e).find('li').map((_, e) => $(e).data('annot')).get()
-            ]).get())
-        }, current))
-            .fail(_ => flash('Error while saving'));
+        save();
 
         popup.close();
         questions.change(annot.q);
@@ -184,6 +179,7 @@ $(() => {
 
     $('#btn-remove').on('click', e => {
         $(popup.edit).remove();
+        save();
         popup.close();
         questions.change();
     });
@@ -325,6 +321,15 @@ $(() => {
 
             $('.dlg-overlay').hide();
         });
+    };
+
+    let save = () => {
+        $.post('/save', $.extend({
+            annotations: JSON.stringify($('.question-annotations').map((_, e) => [
+                $(e).find('li').map((_, e) => $(e).data('annot')).get()
+            ]).get())
+        }, current))
+            .fail(_ => flash('Error while saving'));
     };
 
     $('#dlg-folders .css-treeview').load('/list');
