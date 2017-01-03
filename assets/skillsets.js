@@ -45,7 +45,7 @@ var skillsets = [
     }
     {
         "name": "Clauses",
-        "description": "Coordination or subordination of clauses in a sentence."
+        "description": "Coordination or subordination of clauses in a sentence (multiple predicate argument structures)."
     }
     {
         "name": "Punct",
