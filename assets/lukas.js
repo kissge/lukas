@@ -62,6 +62,10 @@ $(() => {
                 popup.hint = annot.hint;
             }
 
+            if ('note' in annot) {
+                popup.find('input[type=text]').val(annot.note);
+            }
+
             if (typeof edit !== 'undefined') {
                 popup.edit = edit;
                 if (edit) {
@@ -113,7 +117,7 @@ $(() => {
         }
 
         if (popup.isClosed()) {
-            popup.load({q: $('.question-row').index($('.question-row.active')), skills: []}, false);
+            popup.load({q: $('.question-row').index($('.question-row.active')), skills: [], note: ''}, false);
             popup.open();
         }
 
@@ -133,7 +137,7 @@ $(() => {
     $('#btn-close').on('click', popup.close);
 
     let annot2li = annot => {
-        let li = $('<li><div class="skills-wrapper"></div><div class="hint"></div></li>');
+        let li = $('<li><div class="skills-wrapper"></div><div class="hint"></div><div class="note"></div></li>');
         annot.skills.forEach(s => {
             let span = $('<span />');
             span.data('id', s);
@@ -142,6 +146,7 @@ $(() => {
         });
         li.data('annot', annot);
         li.find('.hint').text(annot.hint.text);
+        li.find('.note').text(annot.note);
 
         return li;
     };
@@ -150,7 +155,8 @@ $(() => {
         let annot = {
             q: +$('#popup select').val(),
             skills: $('#popup input[type=checkbox]:checked').map((_, e) => $(e).data('id')).get(),
-            hint: popup.hint
+            hint: popup.hint,
+            note: $('#popup input[type=text]').val(),
         };
 
         let li = annot2li(annot);
