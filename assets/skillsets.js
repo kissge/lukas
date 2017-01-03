@@ -1,42 +1,54 @@
 var skillsets = [
     {
-        "name": "list",
-        "description": "TODO: Description for list"
+        "name": "Tracking",
+        "description": "Object tracking: list, enumeration, set/membership."
     },
     {
-        "name": "math",
-        "description": "TODO: Description for math"
+        "name": "Math",
+        "description": "Mathematical reasoning: arithmetic, statistical, quantitative, comparative, and superlative reasoning."
     },
     {
-        "name": "coref",
-        "description": "TODO: Description for coref"
+        "name": "Coref",
+        "description": "Coreference resolution: pronoun (= pronominalization), one-anaphora."
     },
     {
-        "name": "logical",
-        "description": "TODO: Description for logical"
+        "name": "Logical",
+        "description": "Logical reasoning: conditional, quantifier, transitive."
     },
     {
-        "name": "analogy",
-        "description": "TODO: Description for analogy"
+        "name": "Analogy",
+        "description": "Analogical reasoning: metonymy, metaphor."
     },
     {
-        "name": "sp.temp.",
-        "description": "TODO: Description for sp.temp."
+        "name": "Sptemp",
+        "description": "Spatial/temporal relationship between multiple entities/events/states."
     },
     {
-        "name": "causal",
-        "description": "TODO: Description for causal"
+        "name": "Causal",
+        "description": "Causal relations expressed by causal expressions, e.g., why, because, the reason... (only if exists)."
     },
     {
-        "name": "complex",
-        "description": "TODO: Description for complex"
+        "name": "Ellipsis",
+        "description": "Inference between two facts/events, in which one of facts/events requires understanding of implicit/omitted information (argument, predicate, quantifier, time, place, etc.)."
     },
     {
-        "name": "comsen",
-        "description": "TODO: Description for comsen"
+        "name": "Bridging",
+        "description": "Inference between two facts/events supported by grammatical/conceptual information: hypernymy, shynonymy, thematic role, partial entity/event/state/role, idiom (including constructions), apposition. Two facts/events are sharing some information."
     },
     {
-        "name": "ling.",
-        "description": "TODO: Description for ling."
+        "name": "Elaboration",
+        "description": "Inference between two facts/events supported by factual knowledge: known facts, general knowledge, implicit relation, naming, etc."
     }
+    {
+        "name": "Meta",
+        "description": "Meta-knowledge of reader/writer/document/genre/narrative."
+    }
+    {
+        "name": "Clauses",
+        "description": "Coordination or subordination of clauses in a sentence."
+    }
+    {
+        "name": "Punct",
+        "description": "Punctuation marks, e.g., parenthesis, dash, quotation, exclamation, colon, semicolon, etc."
+    }    
 ];
