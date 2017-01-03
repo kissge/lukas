@@ -4,6 +4,7 @@ ENV['RACK_ENV'] ||= 'development'
 Bundler.require(:default, ENV['RACK_ENV'])
 
 module Lukas
+  require 'fileutils'
   require 'sinatra/base'
   require 'sinatra/json'
 
@@ -84,13 +85,22 @@ module Lukas
 
       document[:annotation] = annotation
 
+      dir = params[:document].split('/')[0...-1]
+      siblings = document_list.select {|path| path.split('/')[0...-1] == dir}
+      index = siblings.index params[:document]
+      document[:prev] = index > 0 ? siblings[index - 1] : nil
+      document[:next] = siblings[index + 1]
+
       json document
     end
 
     post '/save' do
       validation!
 
-      open('data/annotations/' + params[:document] + '/' + params[:annotation] + '.lukas.ann', 'w') do |io|
+      dir = 'data/annotations/' + params[:document]
+      FileUtils.mkdir_p dir unless File.directory? dir
+
+      open(dir + '/' + params[:annotation] + '.lukas.ann', 'w') do |io|
         io.write params[:annotations]
       end
 

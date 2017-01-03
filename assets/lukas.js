@@ -62,6 +62,10 @@ $(() => {
                 popup.hint = annot.hint;
             }
 
+            if ('note' in annot) {
+                popup.find('input[type=text]').val(annot.note);
+            }
+
             if (typeof edit !== 'undefined') {
                 popup.edit = edit;
                 if (edit) {
@@ -113,7 +117,7 @@ $(() => {
         }
 
         if (popup.isClosed()) {
-            popup.load({q: $('.question-row').index($('.question-row.active')), skills: []}, false);
+            popup.load({q: $('.question-row').index($('.question-row.active')), skills: [], note: ''}, false);
             popup.open();
         }
 
@@ -133,7 +137,7 @@ $(() => {
     $('#btn-close').on('click', popup.close);
 
     let annot2li = annot => {
-        let li = $('<li><div class="skills-wrapper"></div><div class="hint"></div></li>');
+        let li = $('<li><div class="skills-wrapper"></div><div class="hint"></div><div class="note"></div></li>');
         annot.skills.forEach(s => {
             let span = $('<span />');
             span.data('id', s);
@@ -142,6 +146,7 @@ $(() => {
         });
         li.data('annot', annot);
         li.find('.hint').text(annot.hint.text);
+        li.find('.note').text(annot.note);
 
         return li;
     };
@@ -150,7 +155,8 @@ $(() => {
         let annot = {
             q: +$('#popup select').val(),
             skills: $('#popup input[type=checkbox]:checked').map((_, e) => $(e).data('id')).get(),
-            hint: popup.hint
+            hint: popup.hint,
+            note: $('#popup input[type=text]').val(),
         };
 
         let li = annot2li(annot);
@@ -165,12 +171,7 @@ $(() => {
             $(popup.edit).remove();
         }
 
-        $.post('/save', $.extend({
-            annotations: JSON.stringify($('.question-annotations').map((_, e) => [
-                $(e).find('li').map((_, e) => $(e).data('annot')).get()
-            ]).get())
-        }, current))
-            .fail(_ => flash('Error while saving'));
+        save();
 
         popup.close();
         questions.change(annot.q);
@@ -178,6 +179,7 @@ $(() => {
 
     $('#btn-remove').on('click', e => {
         $(popup.edit).remove();
+        save();
         popup.close();
         questions.change();
     });
@@ -219,6 +221,13 @@ $(() => {
 
     $('#btn-up').on('click', () => $('#dlg-folders').parent().show());
 
+    $('#btn-prev, #btn-next').on('click', function() {
+        if (!$(this).hasClass('disabled')) {
+            current.document = $(this).data('name');
+            open();
+        }
+    });
+
     $('.dlg-overlay').on('click', function(e) {
         if (e.target === this) {
             $(this).hide();
@@ -239,7 +248,7 @@ $(() => {
             li.appendTo($('#dlg-open ul'));
         });
         $('#dlg-open h2').eq(0).text(current.document);
-        $('#dlg-open input').val('');
+        $('#dlg-open input').val(current.annotation);
         $('#dlg-open').parent().show();
     });
 
@@ -268,7 +277,11 @@ $(() => {
     });
 
     let open = name => {
-        current.annotation = name;
+        if (name) {
+            current.annotation = name;
+        } else {
+            name = current.annotation;
+        }
 
         $('#title-bar span').text(current.document + ' / ' + name);
         $.post('/open', current).done(data => {
@@ -298,6 +311,9 @@ $(() => {
                 ));
             }
 
+            $('#btn-prev').data('name', data.prev).toggleClass('disabled', !data.prev);
+            $('#btn-next').data('name', data.next).toggleClass('disabled', !data.next);
+
             popup.edit = false;
             popup.hint = undefined;
             popup.close();
@@ -305,6 +321,15 @@ $(() => {
 
             $('.dlg-overlay').hide();
         });
+    };
+
+    let save = () => {
+        $.post('/save', $.extend({
+            annotations: JSON.stringify($('.question-annotations').map((_, e) => [
+                $(e).find('li').map((_, e) => $(e).data('annot')).get()
+            ]).get())
+        }, current))
+            .fail(_ => flash('Error while saving'));
     };
 
     $('#dlg-folders .css-treeview').load('/list');
