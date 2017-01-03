@@ -85,6 +85,12 @@ module Lukas
 
       document[:annotation] = annotation
 
+      dir = params[:document].split('/')[0...-1]
+      siblings = document_list.select {|path| path.split('/')[0...-1] == dir}
+      index = siblings.index params[:document]
+      document[:prev] = index > 0 ? siblings[index - 1] : nil
+      document[:next] = siblings[index + 1]
+
       json document
     end
 

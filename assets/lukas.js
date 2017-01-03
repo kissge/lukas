@@ -219,6 +219,13 @@ $(() => {
 
     $('#btn-up').on('click', () => $('#dlg-folders').parent().show());
 
+    $('#btn-prev, #btn-next').on('click', function() {
+        if (!$(this).hasClass('disabled')) {
+            current.document = $(this).data('name');
+            open();
+        }
+    });
+
     $('.dlg-overlay').on('click', function(e) {
         if (e.target === this) {
             $(this).hide();
@@ -268,7 +275,11 @@ $(() => {
     });
 
     let open = name => {
-        current.annotation = name;
+        if (name) {
+            current.annotation = name;
+        } else {
+            name = current.annotation;
+        }
 
         $('#title-bar span').text(current.document + ' / ' + name);
         $.post('/open', current).done(data => {
@@ -297,6 +308,9 @@ $(() => {
                     annot => annot2li(annot).appendTo($('.question-row').eq(annot.q).find('ul'))
                 ));
             }
+
+            $('#btn-prev').data('name', data.prev).toggleClass('disabled', !data.prev);
+            $('#btn-next').data('name', data.next).toggleClass('disabled', !data.next);
 
             popup.edit = false;
             popup.hint = undefined;
