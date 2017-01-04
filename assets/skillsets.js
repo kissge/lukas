@@ -36,8 +36,8 @@ var skillsets = [
         "description": "Inference between two facts/events supported by grammatical/conceptual information: hypernymy, shynonymy, thematic role, partial entity/event/state/role, idiom (including constructions), apposition. Two facts/events are sharing some information."
     },
     {
-        "name": "Elaboration",
-        "description": "Inference between two facts/events supported by factual knowledge: known facts, general knowledge, implicit relation, naming, etc."
+        "name": "Elab",
+        "description": "Elaboration: inference between two facts/events supported by factual knowledge: known facts, general knowledge, implicit relation, naming, etc."
     },
     {
         "name": "Meta",
@@ -45,7 +45,7 @@ var skillsets = [
     },
     {
         "name": "Clauses",
-        "description": "Coordination or subordination of clauses in a sentence (multiple predicate argument structures)."
+        "description": "There is coordination or subordination of clauses in a sentence (multiple predicate argument structures)."
     },
     {
         "name": "Punct",
@@ -53,6 +53,10 @@ var skillsets = [
     },
     {
         "name": "No-skill",
-        "description": "Requires no skills."
+        "description": "No skills are required."
+    },
+    {
+        "name": "Nonsense",
+        "description": " The question is unsolvable/unanswerable given the context."
     }
 ];
