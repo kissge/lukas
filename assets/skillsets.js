@@ -38,17 +38,21 @@ var skillsets = [
     {
         "name": "Elaboration",
         "description": "Inference between two facts/events supported by factual knowledge: known facts, general knowledge, implicit relation, naming, etc."
-    }
+    },
     {
         "name": "Meta",
         "description": "Meta-knowledge of reader/writer/document/genre/narrative."
-    }
+    },
     {
         "name": "Clauses",
         "description": "Coordination or subordination of clauses in a sentence (multiple predicate argument structures)."
-    }
+    },
     {
         "name": "Punct",
         "description": "Punctuation marks, e.g., parenthesis, dash, quotation, exclamation, colon, semicolon, etc."
-    }    
+    },
+    {
+        "name": "No-skill",
+        "description": "Requires no skills."
+    }
 ];
