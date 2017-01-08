@@ -293,6 +293,7 @@ $(() => {
             });
 
             $('.question-row').remove();
+            $('#popup select option').remove();
             data.questions.forEach((q, i) => {
                 let row = $('<section class="question-row">' +
                             '<div class="question-body"></div>' +
